@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:blogapp_with_sir/Authentication%20Screen/utilits.dart';
 import 'package:blogapp_with_sir/Componets/roundbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -120,33 +118,34 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
                     child: InkWell(
                       onTap: () => dialong(context),
                       child: Container(
-                          height: MediaQuery.of(context).size.height * .2,
-                          width: MediaQuery.of(context).size.width * 1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: _image != null
-                              ? ClipRect(
-                                  //image height adjustment
-                                  child: Image.file(
-                                    _image!.absolute,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.fill,
-                                  ),
-                                )
-                              : Container(
-                                  height: 100,
+                        height: MediaQuery.of(context).size.height * .2,
+                        width: MediaQuery.of(context).size.width * 1,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: _image != null
+                            ? ClipRect(
+                                //image height adjustment
+                                child: Image.file(
+                                  _image!.absolute,
                                   width: 100,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade400,
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: const Icon(
-                                    Icons.camera_alt,
-                                    color: Colors.blue,
-                                  ),
-                                )),
+                                  height: 100,
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            : Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade400,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                      ),
                     ),
                   ),
                   const SizedBox(

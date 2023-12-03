@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: loading,
+   
       child: WillPopScope(
         onWillPop: () async {
           SystemNavigator.pop();

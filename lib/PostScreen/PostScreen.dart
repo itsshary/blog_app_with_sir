@@ -18,7 +18,7 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   final dbRef = FirebaseDatabase.instance.ref('Posts');
-  final serarchcontroller = TextEditingController();
+  TextEditingController searchcontroller = TextEditingController();
   String search = "";
 
   final auth = FirebaseAuth.instance;
@@ -30,7 +30,7 @@ class _PostScreenState extends State<PostScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.deepOrange.shade800,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.deepOrange,
@@ -57,15 +57,14 @@ class _PostScreenState extends State<PostScreen> {
           child: Column(
             children: [
               TextFormField(
-                controller: serarchcontroller,
-                decoration: InputDecoration(
+                controller: searchcontroller,
+                decoration: const InputDecoration(
                   hintText: 'Search By Title',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
                 ),
                 onChanged: (String value) {
-                  search = value;
+                  setState(() {});
                 },
               ),
               Expanded(
@@ -74,8 +73,8 @@ class _PostScreenState extends State<PostScreen> {
                 query: dbRef.child('Post List'),
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                  String temptitle = snapshot.child('PTitle').value.toString();
-                  if (serarchcontroller.text.isEmpty) {
+                  final temptitle = snapshot.child('PTitle').value.toString();
+                  if (searchcontroller.text.isEmpty) {
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
@@ -132,7 +131,7 @@ class _PostScreenState extends State<PostScreen> {
                       ),
                     );
                   } else if (temptitle.toLowerCase().contains(
-                      serarchcontroller.text.toLowerCase().toString())) {
+                      searchcontroller.text.toLowerCase().toString())) {
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
